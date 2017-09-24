@@ -23,7 +23,7 @@
     Greetr.prototype = {
 
         fullName: function() {
-            return this.firsName + '' + this.lastName;
+            return this.firsName + ' ' + this.lastName;
         },
         validate: function() {
             if (supportLangs.indexOf(this.language) == -1) {
@@ -62,6 +62,25 @@
         setLang:function(lang){
             this.language=lang;
             this.validate();
+            return this;
+        },
+
+        HTMLGreeting:function(selector,formal){
+            if(!$){
+                throw 'jQuery not loaded!';
+            }
+            if(!selector){
+                throw 'selector is Missing!';
+            }
+            var msg;
+            if(formal){
+                msg=this.formalGreetings();
+            }
+            else{
+                msg=this.greeting();
+            }
+            $(selector).html(msg);
+
             return this;
         }
 
